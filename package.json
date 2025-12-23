@@ -1,20 +1,25 @@
 {
   "name": "cf-worker-ws-dev",
   "version": "1.0.0",
-  "description": "A tunnel for the edgetunnel project to allow deployed applications to cloudflare pages and workers to be accessed via a custom domain.",
-  "main": "_worker.js",
+  "description": "A tunnel for the edgetunnel project compatible with Vercel",
+  "main": "api/worker.js",
   "scripts": {
-    "deploy": "wrangler deploy",
-    "build": "wrangler deploy --dry-run",
-    "dev": "wrangler dev --remote",
-    "dev-local": "wrangler dev index.js --remote",
-    "obfuscate": "javascript-obfuscator index.js --output _worker.js --compact true --control-flow-flattening true --control-flow-flattening-threshold 1 --dead-code-injection true --dead-code-injection-threshold 1 --string-array true --string-array-encoding 'rc4' --string-array-threshold 1 --transform-object-keys true --unicode-escape-sequence true"
+    "dev": "vercel dev",
+    "start": "node api/worker.js",
+    "deploy": "vercel --prod",
+    "build": "echo 'No build step required'"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "node-fetch": "^2.6.9"
+  },
+  "devDependencies": {
+    "vercel": "^28.16.0"
+  },
+  "engines": {
+    "node": "18.x"
   },
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@cloudflare/workers-types": "^4.20230710.1",
-    "javascript-obfuscator": "^4.1.1",
-    "wrangler": "^3.2.0"
-  }
+  "license": "ISC"
 }
